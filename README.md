@@ -7,7 +7,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 To build for production:
 ```bash
-npm run build
+npm run export
 ```
 
 The generated site will be built in the `out/` folder.
