@@ -22,6 +22,9 @@ function normalize(s: string): string {
 
 function nonEmpty(row: any): boolean {
   const { Drug, ...fields } = row;
+  if (!Drug) {
+    return false;
+  }
   return Object.values(fields).filter(value => value !== '').length > 0;
 }
 
