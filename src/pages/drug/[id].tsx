@@ -2,6 +2,7 @@ import styles from '../../page.module.css'
 import {getData, Row} from '../../data'
 import {GetStaticPropsContext} from "next";
 import {Grid, Paper} from "@material-ui/core";
+import Link from "next/link";
 
 export async function getStaticProps(ctx: GetStaticPropsContext) {
   const id = ctx.params?.id as string;
@@ -51,7 +52,7 @@ export default function Id({drug}: { drug: Row }) {
           </Grid>
           <Grid xs={6}>
             {drug.goodrx ?
-                <Paper  className={styles.paper}>Goodrx: {drug.goodrx}</Paper>
+                <Paper  className={styles.paper}><Link href={drug.goodrx}>Goodrx</Link></Paper>
                 : null}
           </Grid>
           <Grid xs={6}>
