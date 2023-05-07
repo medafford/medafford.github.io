@@ -1,4 +1,5 @@
 /* eslint-disable react/display-name */
+import styles from '../page.module.css'
 import {forwardRef} from 'react';
 import {getData, Row} from '../data';
 import MaterialTable, {Icons} from "material-table";
@@ -59,9 +60,9 @@ export default function Home({data}: { data: Record<string, Row> }) {
   };
 
   return <main>
-    <h1>MedAfford</h1>
+    <h1 className={styles.heading}>MedAfford</h1>
     <MaterialTable
-        title="Data"
+        title=""
         icons={tableIcons}
         columns={columns}
         data={Object.values(data)}

@@ -17,5 +17,8 @@ The generated site will be built in the `out/` folder.
 
 ### Deploy
 ```bash
+git add .
+git commit -m "<description of changes>"
+git push
 git subtree push --prefix out origin gh-pages
 ```
