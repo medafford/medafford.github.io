@@ -1,5 +1,4 @@
 :root {
-  --navy: #052049;
   --white: #F2F3F4;
   --cool-gray: #B4B9BF;
   --black: #000000;
@@ -10,7 +9,6 @@ body {
   height: 100%;
   width: 100%;
   margin: 0;
-  background-color: var(--navy);
   font-family: 'Roboto', sans-serif;
 }
 

@@ -10,8 +10,16 @@ import {AppProps} from "next/app";
 import Head from 'next/head';
 
 export default function App({Component, pageProps}: AppProps<any>) {
+  const theme = createTheme({
+    palette: {
+      contrastThreshold: 4.5,
+      background: {
+        default: '#052049'
+      }
+    }
+  });
   return (
-      <ThemeProvider theme={createTheme()}>
+      <ThemeProvider theme={theme}>
         <Head>
           <title>Medafford</title>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
