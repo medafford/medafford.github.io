@@ -1,7 +1,7 @@
 import styles from '../../page.module.css'
 import {getData, Row} from '../../data'
 import {GetStaticPropsContext} from "next";
-import {Grid, Paper} from "@material-ui/core";
+import {Grid, Paper} from "@mui/material";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
