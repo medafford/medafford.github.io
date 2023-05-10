@@ -18,7 +18,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install gspread
       - name: Run python script
-        with:
+        env:
           SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
         run: |
           echo "$SERVICE_ACCOUNT_KEY" > deploy/service-account.json
