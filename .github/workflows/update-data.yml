@@ -1,4 +1,5 @@
 name: Update spreadsheet data and deploy
+on: workflow-dispatch
 
 jobs:
   build:
