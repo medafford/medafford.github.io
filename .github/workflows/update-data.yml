@@ -40,6 +40,10 @@ jobs:
           git add data.csv out/
           git commit -m "Update data.csv and build static website"
           git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Push subtree to gh-pages branch
         run: |
           git subtree push --prefix out origin gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
