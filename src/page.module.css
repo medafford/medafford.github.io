@@ -1,23 +1,20 @@
 .main {
-  max-width: 90%;
   margin: 0 auto;
-  padding: 3rem;
+  padding: 2rem;
   height: 100%;
 }
 
 .heading {
-  margin-bottom: 20px;
   color: var(--white);
 }
 
 .info {
   background-color: var(--cool-gray);
   padding: 20px;
-  border-radius: var(--border-radius);
 }
 
 .paper {
-  margin: 10px 10px;
+  margin: 5px 10px;
   padding: 5px 10px;
   background-color: var(--white);
   color: var(--black);

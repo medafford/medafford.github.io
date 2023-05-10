@@ -1,15 +1,8 @@
 :root {
-  --border-radius: 4px;
   --navy: #052049;
-  --blue: #006BE9;
   --white: #F2F3F4;
-  --gray: #D1D3D3;
   --cool-gray: #B4B9BF;
-  --blue-gray: #506380;
   --black: #000000;
-  --yellow: #FEB80A;
-  --orange: #FA6E1E;
-  --red: #E61048;
 }
 
 html,
@@ -18,6 +11,7 @@ body {
   width: 100%;
   margin: 0;
   background-color: var(--navy);
+  font-family: 'Roboto', sans-serif;
 }
 
 a {

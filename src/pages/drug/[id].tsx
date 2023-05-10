@@ -1,7 +1,7 @@
 import styles from '../../page.module.css'
 import {getData, Row} from '../../data'
 import {GetStaticPropsContext} from "next";
-import {Grid, Paper} from "@mui/material";
+import {Card, Grid, Paper} from "@mui/material";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
@@ -31,53 +31,55 @@ export async function getStaticPaths() {
   }
 }
 
+function Element({ children }) {
+  return <Paper elevation={3} className={styles.paper}>{children}</Paper>
+}
+
 export default function Id({drug}: { drug: Row }) {
   return (
       <main>
         <h1 className={styles.heading}>{drug.drug}{(drug.generic ?
             <span>{", "}<i>{drug.generic}</i></span> : "")}</h1>
-        <div className={styles.info}>
+        <Card variant={"outlined"} className={styles.info}>
           <Grid container spacing={2}>
             <Grid item={true} xs={12}>
               {drug.manufacturer ?
-                  <Paper className={styles.paper}>Manufacturer: {drug.manufacturer}</Paper>
+                  <Element>Manufacturer: {drug.manufacturer}</Element>
                   : null}
             </Grid>
             <Grid item={true} xs={12}>
               {drug.indication ?
-                  <Paper className={styles.paper}>Indication: {drug.indication}</Paper>
+                  <Element>Indication: {drug.indication}</Element>
                   : null}
             </Grid>
             <Grid item={true} xs={6}>
               {drug.pap_no_insurance ?
-                  <Paper className={styles.paper}>PAP (no
-                    insurance): {drug.pap_no_insurance}</Paper>
-                  : <Paper className={styles.paper}><i>No PAP plan available</i></Paper>}
+                  <Element>PAP (no
+                    insurance): {drug.pap_no_insurance}</Element>
+                  : <Element><i>No PAP plan available</i></Element>}
             </Grid>
             <Grid item={true} xs={6}>
               {drug.goodrx ?
-                  <Paper className={styles.paper}><Link href={drug.goodrx}>Goodrx</Link></Paper>
+                  <Element><Link href={drug.goodrx}>Goodrx</Link></Element>
                   : null}
             </Grid>
             <Grid item={true} xs={6}>
               {drug.copay_cards ?
-                  <Paper
-                      className={styles.paper}><ReactMarkdown>{"**Copay_cards:** " + drug.copay_cards}</ReactMarkdown></Paper>
+                  <Element><ReactMarkdown>{"**Copay_cards:** " + drug.copay_cards}</ReactMarkdown></Element>
                   : null}
             </Grid>
             <Grid item={true} xs={6}>
               {drug.costplus_drugs ?
-                  <Paper
-                      className={styles.paper}><ReactMarkdown>{"**Costplus_drugs**: " + drug.costplus_drugs}</ReactMarkdown></Paper>
+                  <Element><ReactMarkdown>{"**Costplus_drugs**: " + drug.costplus_drugs}</ReactMarkdown></Element>
                   : null}
             </Grid>
             <Grid item={true} xs={6}>
               {drug.singlecare ?
-                  <Paper className={styles.paper}>SingleCare: {drug.singlecare}</Paper>
+                  <Element>SingleCare: {drug.singlecare}</Element>
                   : null}
             </Grid>
           </Grid>
-        </div>
+        </Card>
       </main>
   )
 }
