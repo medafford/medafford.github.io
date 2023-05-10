@@ -48,11 +48,6 @@ export default function Id({drug}: { drug: Row }) {
                   <Paper className={styles.paper}>Indication: {drug.indication}</Paper>
                   : null}
             </Grid>
-            <Grid item={true} xs={12}>
-              {drug.notes ?
-                  <Paper className={styles.paper}>Notes: {drug.notes}</Paper>
-                  : null}
-            </Grid>
             <Grid item={true} xs={6}>
               {drug.pap_no_insurance ?
                   <Paper className={styles.paper}>PAP (no
@@ -77,8 +72,8 @@ export default function Id({drug}: { drug: Row }) {
                   : null}
             </Grid>
             <Grid item={true} xs={6}>
-              {drug.pap_insurance ?
-                  <Paper className={styles.paper}>PAP (insurance): {drug.pap_insurance}</Paper>
+              {drug.singlecare ?
+                  <Paper className={styles.paper}>SingleCare: {drug.singlecare}</Paper>
                   : null}
             </Grid>
           </Grid>

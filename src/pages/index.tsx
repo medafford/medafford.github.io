@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import styles from '../page.module.css'
 import {forwardRef} from 'react';
-import {getData, Row} from '../data';
+import {getData, RowTrimmed} from '../data';
 import MaterialTable, {Icons} from "material-table";
 import Link from "next/link";
 import AddBox from '@material-ui/icons/AddBox';
@@ -21,14 +21,26 @@ import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 
 export async function getStaticProps() {
+  const fullData = getData();
+  const data = Object.fromEntries(
+      Object.entries(fullData).map(
+          ([key, value]) => [key, {
+            key: value.key,
+            drug: value.drug,
+            manufacturer: value.manufacturer,
+            generic: value.generic
+          }]
+      )
+  )
+
   return {
     props: {
-      data: getData(),
+      data: data,
     },
   };
 }
 
-export default function Home({data}: { data: Record<string, Row> }) {
+export default function Home({data}: { data: Record<string, RowTrimmed> }) {
   const columns = [
     {
       title: "Drug",

@@ -8,12 +8,21 @@ export interface Row {
   manufacturer: string
   generic: string
   indication: string
-  pap_insurance: string
   pap_no_insurance: string
+  pap_notes: string
   goodrx: string
   costplus_drugs: string
   copay_cards: string
-  notes: string
+  copay_cards_notes: string
+  inside_rx: string
+  singlecare: string
+}
+
+export interface RowTrimmed {
+  key: string
+  drug: string
+  manufacturer: string
+  generic: string
 }
 
 function normalize(s: string): string {
