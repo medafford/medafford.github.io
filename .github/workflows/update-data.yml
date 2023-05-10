@@ -1,0 +1,44 @@
+name: Update spreadsheet data and deploy
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+      - name: Install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install gspread
+      - name: Run python script
+        with:
+          SERVICE_ACCOUNT_KEY: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        run: |
+          echo "$SERVICE_ACCOUNT_KEY" > deploy/service-account.json
+          python deploy/update_data.py
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+      - name: Install node.js Dependencies
+        run: |
+          npm ci
+      - name: Build and Export
+        run: |
+          npm run export
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data.csv out/
+          git commit -m "Update data.csv and build static website"
+          git push origin main
+      - name: Push subtree to gh-pages branch
+        run: |
+          git subtree push --prefix out origin gh-pages
