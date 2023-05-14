@@ -2,6 +2,7 @@ import React from 'react';
 import {AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar} from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
+import { useRouter } from 'next/router'
 
 function Item({href, children}) {
   return <Box sx={{
@@ -16,14 +17,9 @@ function Item({href, children}) {
 }
 
 export default function Navbar() {
-  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const router = useRouter();
 
-  const handleDrawerOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleDrawerClose = () => {
-    setAnchorElNav(null);
-  };
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const pages = ["Home", "How to Use this Website", "About", "General Resources", "Federal Poverty Limits"];
 
@@ -33,6 +29,15 @@ export default function Navbar() {
     }
     return "/" + pageName.replace(/ /g, "_").toLowerCase();
   }
+
+  const handleDrawerOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleDrawerClose = (page: string | undefined) => {
+    // noinspection JSIgnoredPromiseFromCall
+    router.push(getLink(page));
+    setAnchorElNav(null);
+  };
 
   return <AppBar position={"static"}>
     <Toolbar>
@@ -63,8 +68,8 @@ export default function Navbar() {
               display: {xs: 'block', md: 'none'},
             }}
         >
-          {pages.map((page) => (<MenuItem key={page} onClick={handleDrawerClose}>
-            <Link href={getLink(page)}><span style={{ color: '#000' }}>{page}</span></Link>
+          {pages.map((page) => (<MenuItem key={page} onClick={() => handleDrawerClose(page)}>
+            {page}
           </MenuItem>))}
         </Menu>
       </Box>
