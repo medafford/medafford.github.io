@@ -8,6 +8,7 @@ import {Box, createTheme, StyledEngineProvider, ThemeProvider} from '@mui/materi
 import CssBaseline from '@mui/material/CssBaseline';
 import {AppProps} from "next/app";
 import Head from 'next/head';
+import Navbar from "../navbar";
 
 export default function App({Component, pageProps}: AppProps<any>) {
   const theme = createTheme({
@@ -26,6 +27,7 @@ export default function App({Component, pageProps}: AppProps<any>) {
         </Head>
         <CssBaseline />
         <StyledEngineProvider injectFirst>
+          <Navbar />
           <Box className={styles.main}>
             <Component {...pageProps} />
           </Box>
