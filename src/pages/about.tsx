@@ -1,11 +1,10 @@
-import styles from "@/page.module.css";
-import {Card} from "@mui/material";
+import { Heading, Info } from '../styles'
 
 export default function About() {
   return <main>
-    <h1 className={styles.heading}>About</h1>
-    <Card variant={"outlined"} className={styles.info}>
+    <Heading>About</Heading>
+    <Info variant={"outlined"}>
       TODO
-    </Card>
+    </Info>
   </main>
 }

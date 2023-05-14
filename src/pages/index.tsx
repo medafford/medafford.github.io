@@ -1,5 +1,4 @@
 /* eslint-disable react/display-name */
-import styles from '../page.module.css'
 import {forwardRef} from 'react';
 import {getData, RowTrimmed} from '../data';
 import MaterialTable, {Icons} from "material-table";
@@ -19,19 +18,13 @@ import Remove from '@mui/icons-material/Remove';
 import SaveAlt from '@mui/icons-material/SaveAlt';
 import Search from '@mui/icons-material/Search';
 import ViewColumn from '@mui/icons-material/ViewColumn';
+import {Heading} from '../styles';
 
 export async function getStaticProps() {
   const fullData = getData();
-  const data = Object.fromEntries(
-      Object.entries(fullData).map(
-          ([key, value]) => [key, {
-            key: value.key,
-            drug: value.drug,
-            manufacturer: value.manufacturer,
-            generic: value.generic
-          }]
-      )
-  )
+  const data = Object.fromEntries(Object.entries(fullData).map(([key, value]) => [key, {
+    key: value.key, drug: value.drug, manufacturer: value.manufacturer, generic: value.generic
+  }]))
 
   return {
     props: {
@@ -41,15 +34,11 @@ export async function getStaticProps() {
 }
 
 export default function Home({data}: { data: Record<string, RowTrimmed> }) {
-  const columns = [
-    {
-      title: "Drug",
-      render: (row: any) => <Link href={`/drug/${row.key}`}>{row.drug}</Link>,
-      field: "drug",
-    },
-    {title: "Manufacturer", field: "manufacturer"},
-    {title: "Generic", field: "generic"}
-  ];
+  const columns = [{
+    title: "Drug",
+    render: (row: any) => <Link href={`/drug/${row.key}`}>{row.drug}</Link>,
+    field: "drug",
+  }, {title: "Manufacturer", field: "manufacturer"}, {title: "Generic", field: "generic"}];
 
   const tableIcons: Icons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref}/>),
@@ -72,7 +61,7 @@ export default function Home({data}: { data: Record<string, RowTrimmed> }) {
   };
 
   return <main>
-    <h1 className={styles.heading}>MedAfford</h1>
+    <Heading>MedAfford</Heading>
     <MaterialTable
         title=""
         icons={tableIcons}

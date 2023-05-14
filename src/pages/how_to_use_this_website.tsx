@@ -1,11 +1,10 @@
-import styles from "@/page.module.css";
-import {Card} from "@mui/material";
+import { Heading, Info } from '../styles'
 
 export default function HowToUseThisWebsite() {
   return <main>
-    <h1 className={styles.heading}>How to Use this Website</h1>
-    <Card variant={"outlined"} className={styles.info}>
+    <Heading>How to Use this Website</Heading>
+    <Info variant={"outlined"}>
       TODO
-    </Card>
+    </Info>
   </main>
 }

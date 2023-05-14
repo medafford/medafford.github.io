@@ -1,11 +1,10 @@
-import styles from "@/page.module.css";
-import {Card} from "@mui/material";
+import { Heading, Info } from '../styles'
 
 export default function GeneralResources() {
   return <main>
-    <h1 className={styles.heading}>General Resources</h1>
-    <Card variant={"outlined"} className={styles.info}>
+    <Heading>General Resources</Heading>
+    <Info variant={"outlined"}>
       TODO
-    </Card>
+    </Info>
   </main>
 }

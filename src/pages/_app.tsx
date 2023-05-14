@@ -1,14 +1,17 @@
-import '../globals.css'
-import styles from '../page.module.css'
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import {Box, createTheme, StyledEngineProvider, ThemeProvider} from '@mui/material';
+import {createTheme, ThemeProvider} from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import {AppProps} from "next/app";
 import Head from 'next/head';
 import Navbar from "../navbar";
+import createCache from '@emotion/cache'
+import { CacheProvider } from '@emotion/react'
+import { globalStyles, Main } from '../styles'
+
+const cache = createCache({ key: 'next' })
 
 export default function App({Component, pageProps}: AppProps<any>) {
   const theme = createTheme({
@@ -20,18 +23,19 @@ export default function App({Component, pageProps}: AppProps<any>) {
     }
   });
   return (
-      <ThemeProvider theme={theme}>
-        <Head>
-          <title>Medafford</title>
-          <meta name="viewport" content="initial-scale=1, width=device-width" />
-        </Head>
-        <CssBaseline />
-        <StyledEngineProvider injectFirst>
+      <CacheProvider value={cache}>
+        <ThemeProvider theme={theme}>
+          <Head>
+            <title>Medafford</title>
+            <meta name="viewport" content="initial-scale=1, width=device-width" />
+          </Head>
+          <CssBaseline />
+          {globalStyles}
           <Navbar />
-          <Box className={styles.main}>
+          <Main>
             <Component {...pageProps} />
-          </Box>
-        </StyledEngineProvider>
-      </ThemeProvider>
+          </Main>
+        </ThemeProvider>
+      </CacheProvider>
   )
 }

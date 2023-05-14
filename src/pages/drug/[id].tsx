@@ -1,7 +1,7 @@
-import styles from '../../page.module.css'
+import { Heading, Info, Paper } from '../../styles'
 import {getData, Row} from '../../data'
 import {GetStaticPropsContext} from "next";
-import {Card, Grid, Paper} from "@mui/material";
+import {Grid} from "@mui/material";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
@@ -31,7 +31,7 @@ export async function getStaticPaths() {
 }
 
 function Element({children}) {
-  return <Paper elevation={3} className={styles.paper}>{children}</Paper>
+  return <Paper elevation={3}>{children}</Paper>
 }
 
 function Item({children}) {
@@ -40,9 +40,9 @@ function Item({children}) {
 
 export default function Id({drug}: { drug: Row }) {
   return (<main>
-    <h1 className={styles.heading}>{drug.drug}{(drug.generic ?
-        <span>{", "}<i>{drug.generic}</i></span> : "")}</h1>
-    <Card variant={"outlined"} className={styles.info}>
+    <Heading>{drug.drug}{(drug.generic ?
+        <span>{", "}<i>{drug.generic}</i></span> : "")}</Heading>
+    <Info variant={"outlined"}>
       <Grid container spacing={2}>
         <Grid item={true} xs={12}>
           {drug.manufacturer ? <Element>Manufacturer: {drug.manufacturer}</Element> : null}
@@ -75,6 +75,6 @@ export default function Id({drug}: { drug: Row }) {
           {drug.singlecare ? <Element>SingleCare: {drug.singlecare}</Element> : null}
         </Item>
       </Grid>
-    </Card>
+    </Info>
   </main>)
 }
