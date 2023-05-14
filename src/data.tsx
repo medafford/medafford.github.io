@@ -26,7 +26,7 @@ export interface RowTrimmed {
 }
 
 function normalize(s: string): string {
-  return s.replace(" ", "_").replace(/\W/g, '').toLowerCase()
+  return s.replace(/ /g, "_").replace(/\W/g, '').toLowerCase()
 }
 
 function nonEmpty(row: any): boolean {
