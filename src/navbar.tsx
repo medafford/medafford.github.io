@@ -34,12 +34,17 @@ export default function Navbar() {
     setAnchorElNav(event.currentTarget);
   };
   const handleDrawerClose = (page: string | undefined) => {
-    // noinspection JSIgnoredPromiseFromCall
-    router.push(getLink(page));
+    if (page) {
+      // noinspection JSIgnoredPromiseFromCall
+      router.push(getLink(page));
+    }
     setAnchorElNav(null);
   };
 
-  return <AppBar position={"static"}>
+  return <AppBar position={"static"} style={{
+    backgroundColor: "#bbd8e8",
+    color: "#000"
+  }}>
     <Toolbar>
       <Box sx={{flexGrow: 1, display: {xs: 'flex', sm: 'none'}}}>
         <IconButton
@@ -63,7 +68,7 @@ export default function Navbar() {
               vertical: 'top', horizontal: 'left',
             }}
             open={Boolean(anchorElNav)}
-            onClose={handleDrawerClose}
+            onClose={() => handleDrawerClose(undefined)}
             sx={{
               display: {xs: 'block', md: 'none'},
             }}

@@ -18,7 +18,7 @@ export default function App({Component, pageProps}: AppProps<any>) {
     palette: {
       contrastThreshold: 4.5,
       background: {
-        default: '#052049'
+        default: '#FFFFFF'
       }
     }
   });

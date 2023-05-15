@@ -40,15 +40,15 @@ export default function Home({data}: { data: Record<string, RowTrimmed> }) {
   });
 
   return <main>
-    <Heading>MedAfford</Heading>
+    <Heading>Prescription Affordability Navigator</Heading>
     <Box style={{
-      backgroundColor: "var(--cool-gray)",
-      padding: "5px",
+      backgroundColor: "#bbd8e8",
+      padding: "10px",
       borderRadius: "4px",
       marginBottom: '15px',
     }}>
       <TextField
-          label="Search"
+          label="Search by brand name or generic name"
           variant="outlined"
           style={{
             width: '100%'
@@ -76,10 +76,14 @@ export default function Home({data}: { data: Record<string, RowTrimmed> }) {
           disableColumnSelector
           pageSizeOptions={[5, 20, 50]}
       /> : <Box style={{
-        backgroundColor: "var(--white)",
-        padding: "20px",
-        borderRadius: "4px"
+        padding: "20px"
       }}>{"No Matches Found"}</Box>
     }
+    <Box style={{
+      marginTop: "30px",
+      padding: "20px",
+      width: "80%"
+    }}>The Prescription Affordability Navigator offers cost-saving suggestions for medications
+      used in the treatment of <b>Asthma</b> and <b>Diabetes</b></Box>
   </main>
 }

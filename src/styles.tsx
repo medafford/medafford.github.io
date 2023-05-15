@@ -1,6 +1,6 @@
 import { css, Global } from '@emotion/react'
 import { styled } from '@mui/material/styles';
-import {Box, Card, Paper as PaperMui} from "@mui/material";
+import {Box, Button as ButtonMui, Card, Paper as PaperMui} from "@mui/material";
 
 export const globalStyles = (
     <Global
@@ -15,7 +15,6 @@ export const globalStyles = (
       
       :root {
         --white: #F2F3F4;
-        --cool-gray: #B4B9BF;
         --black: #000000;
       }
 
@@ -36,7 +35,7 @@ export const globalStyles = (
 )
 
 const heading = css({
-    color: 'var(--white)'
+    color: 'var(--black)'
 })
 
 export const Heading = styled('h1')`
@@ -54,7 +53,7 @@ export const Main = styled(Box)`
 `
 
 const info = css({
-  backgroundColor: 'var(--cool-gray)',
+  backgroundColor: 'var(--white)',
   padding: '20px'
 })
 
@@ -63,10 +62,23 @@ export const Info = styled(Card)`
 `
 
 const paper = css({
-  margin: '5px 10px',
-  padding: '5px 10px'
+  margin: '15px 20px',
+  padding: '15px 20px',
+  backgroundColor: "#FFDA66",
+  color: "#002C63"
 })
 
 export const Paper = styled(PaperMui)`
   ${paper};
+`
+
+const button = css({
+  margin: '15px auto',
+  padding: '15px 100px',
+  backgroundColor: "#FFDA66",
+  color: "#002C63"
+})
+
+export const Button = styled(ButtonMui)`
+  ${button};
 `
