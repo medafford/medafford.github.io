@@ -25,7 +25,7 @@ export interface RowTrimmed {
   generic: string
 }
 
-function normalize(s: string): string {
+export function normalize(s: string): string {
   return s.replace(/ /g, "_").replace(/\W/g, '').toLowerCase()
 }
 
