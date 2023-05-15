@@ -3,7 +3,7 @@ import fs from "fs";
 import path from "path";
 
 export interface Row {
-  key: string
+  id: string
   drug: string
   manufacturer: string
   generic: string
@@ -19,7 +19,7 @@ export interface Row {
 }
 
 export interface RowTrimmed {
-  key: string
+  id: string
   drug: string
   manufacturer: string
   generic: string
@@ -52,11 +52,11 @@ export function parseCSV(filePath: string) {
       const newKey = normalize(key);
       newRow[newKey] = normalize(value) == "na" ? "" : value;
     }
-    newRow.key = normalize(newRow.drug);
+    newRow.id = normalize(newRow.drug);
     return newRow as Row;
   });
   for (const row of rows) {
-    result[row.key] = row;
+    result[row.id] = row;
   }
   return result;
 }

@@ -1,29 +1,14 @@
-/* eslint-disable react/display-name */
-import {forwardRef} from 'react';
 import {getData, RowTrimmed} from '../data';
-import MaterialTable, {Icons} from "material-table";
 import Link from "next/link";
-import AddBox from '@mui/icons-material/AddBox';
-import ArrowDownward from '@mui/icons-material/ArrowDownward';
-import Check from '@mui/icons-material/Check';
-import ChevronLeft from '@mui/icons-material/ChevronLeft';
-import ChevronRight from '@mui/icons-material/ChevronRight';
-import Clear from '@mui/icons-material/Clear';
-import DeleteOutline from '@mui/icons-material/DeleteOutline';
-import Edit from '@mui/icons-material/Edit';
-import FilterList from '@mui/icons-material/FilterList';
-import FirstPage from '@mui/icons-material/FirstPage';
-import LastPage from '@mui/icons-material/LastPage';
-import Remove from '@mui/icons-material/Remove';
-import SaveAlt from '@mui/icons-material/SaveAlt';
-import Search from '@mui/icons-material/Search';
-import ViewColumn from '@mui/icons-material/ViewColumn';
-import {Heading} from '../styles';
+import {Heading} from '../styles'
+import {DataGrid} from "@mui/x-data-grid";
+import {Box, TextField} from "@mui/material";
+import {useState} from "react";
 
 export async function getStaticProps() {
   const fullData = getData();
   const data = Object.fromEntries(Object.entries(fullData).map(([key, value]) => [key, {
-    key: value.key, drug: value.drug, manufacturer: value.manufacturer, generic: value.generic
+    id: value.id, drug: value.drug, manufacturer: value.manufacturer, generic: value.generic
   }]))
 
   return {
@@ -34,43 +19,67 @@ export async function getStaticProps() {
 }
 
 export default function Home({data}: { data: Record<string, RowTrimmed> }) {
-  const columns = [{
-    title: "Drug",
-    render: (row: any) => <Link href={`/drug/${row.key}`}>{row.drug}</Link>,
-    field: "drug",
-  }, {title: "Manufacturer", field: "manufacturer"}, {title: "Generic", field: "generic"}];
+  const [filter, setFilter] = useState("");
 
-  const tableIcons: Icons = {
-    Add: forwardRef((props, ref) => <AddBox {...props} ref={ref}/>),
-    Check: forwardRef((props, ref) => <Check {...props} ref={ref}/>),
-    Clear: forwardRef((props, ref) => <Clear {...props} ref={ref}/>),
-    Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref}/>),
-    DetailPanel: forwardRef((props, ref) => <ChevronRight {...props} ref={ref}/>),
-    Edit: forwardRef((props, ref) => <Edit {...props} ref={ref}/>),
-    Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref}/>),
-    Filter: forwardRef((props, ref) => <FilterList {...props} ref={ref}/>),
-    FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref}/>),
-    LastPage: forwardRef((props, ref) => <LastPage {...props} ref={ref}/>),
-    NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref}/>),
-    PreviousPage: forwardRef((props, ref) => <ChevronLeft {...props} ref={ref}/>),
-    ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref}/>),
-    Search: forwardRef((props, ref) => <Search {...props} ref={ref}/>),
-    SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref}/>),
-    ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref}/>),
-    ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref}/>)
-  };
+  const columns = [{
+    headerName: "Drug",
+    description: "Drug Name",
+    field: "drug",
+    renderCell: (row: any) => <Link href={`/drug/${row.id}`}>{row.value}</Link>,
+    flex: 2
+  }, {
+    headerName: "Manufacturer", description: "Drug Manufacturer", field: "manufacturer", flex: 1
+  }, {
+    headerName: "Generic", description: "Generic Name", field: "generic", flex: 1
+  }];
+
+  const filterValue = filter.toLowerCase();
+
+  const rows = Object.values(data).filter((row) => {
+    return row.drug.toLowerCase().includes(filterValue) || row.generic.toLowerCase().includes(filterValue) || row.manufacturer.toLowerCase().includes(filterValue) || row.id.includes(filterValue)
+  });
 
   return <main>
     <Heading>MedAfford</Heading>
-    <MaterialTable
-        title=""
-        icons={tableIcons}
-        columns={columns}
-        data={Object.values(data)}
-        options={{
-          sorting: true
-        }}
-    />
-
+    <Box style={{
+      backgroundColor: "var(--cool-gray)",
+      padding: "5px",
+      borderRadius: "4px",
+      marginBottom: '15px',
+    }}>
+      <TextField
+          label="Search"
+          variant="outlined"
+          style={{
+            width: '100%'
+          }}
+          onChange={(event) => setFilter(event.target.value)}
+      />
+    </Box>
+    {
+      rows.length > 0 ? <DataGrid
+          columns={columns}
+          rows={rows}
+          style={{
+            backgroundColor: "var(--white)"
+          }}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                page: 0, pageSize: 5
+              }
+            }
+          }}
+          rowSelection={false}
+          disableRowSelectionOnClick
+          disableColumnMenu
+          disableColumnSelector
+          pageSizeOptions={[5, 20, 50]}
+      /> : <Box style={{
+        backgroundColor: "var(--white)",
+        padding: "20px",
+        borderRadius: "4px"
+      }}>{"No Matches Found"}</Box>
+    }
   </main>
 }

@@ -15,7 +15,7 @@
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.12.3",
-    "material-table": "^2.0.3",
+    "@mui/x-data-grid": "^6.4.0",
     "next": "^12.1.2",
     "papaparse": "^5.4.1",
     "react": "^17.0.2",

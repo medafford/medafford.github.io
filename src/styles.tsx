@@ -22,12 +22,20 @@ export const globalStyles = (
       a {
         text-decoration: none;
       }
+      
+      .MuiDataGrid-root .MuiDataGrid-main {
+        .MuiDataGrid-cell:focus,
+        .MuiDataGrid-cell:focus-within,
+        .MuiDataGrid-columnHeader:focus,
+        .MuiDataGrid-columnHeader:focus-within {
+          outline: none;
+        }
+      }
     `}
     />
 )
 
 const heading = css({
-    marginTop: '80px',
     color: 'var(--white)'
 })
 
